@@ -8,7 +8,7 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const dotenv = require('dotenv');
 const session = require('express-session');
-
+const Room = require("./models/room")
 dotenv.config({ path: './config.env' });
 
 
@@ -23,7 +23,8 @@ const io = require("socket.io")(server, {
 
 //   debug: true,
 // });
-
+const connectDB = require('./config/db');
+connectDB();
 // app.use("/peerjs", peerServer);
 app.use(express.static("public"));
 app.use(
@@ -34,14 +35,8 @@ app.use(
     maxAge: 24 * 60 * 60 * 1000
   })
 );
-mongoose.connect("mongodb://localhost:27017/roomDB")
 
-const roomSchema = new mongoose.Schema({
-  roomId: String,
-  users: [String]
-})
 
-const Room = mongoose.model("Room", roomSchema);
 
 app.get('/auth/google',
   passport.authenticate('google', { scope: ['profile'] }));
@@ -109,7 +104,8 @@ app.get('/auth/logout', (req, res) => {
 
 app.get("/home", (req, res) => {
   if (req.user) {
-    res.render("home");
+    
+    res.render("home", { roomId:  uuidv4()});
   }
   else {
     res.redirect('/auth/login');
@@ -137,13 +133,9 @@ io.on("connection", (socket) => {
         foundRoom.save();
       }
     })
-
-
-    socket.on("message", (message) => {
-      io.to(roomId).emit("createMessage", message, userName);
-    });
-  });
+})
 });
+
 
 server.listen(process.env.PORT || 3000, function () {
   console.log(`Server running on port ${process.env.PORT}`.rainbow.bold);
