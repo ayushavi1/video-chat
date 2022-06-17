@@ -46,12 +46,10 @@ body {
   font-size: 16px;
 }
 .tabs {
-  margin-left: 6rem;
   background-color: #eee;
   width: 60%;
   display: inline-block;
   box-sizing: border-box;
-  float: left;
   min-height: 47px;
 }
 .tabs .active {
