@@ -1,0 +1,205 @@
+body {
+  background-color: #eee;
+}
+.login-wrap {
+  margin: 0 auto;
+  width: 500px;
+}
+.login-box {
+  font-family: 'Open Sans', sans-serif;
+  margin: 20px auto;
+  width: 100%;
+  height: auto;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.33);
+  -moz-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.33);
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.33);
+  float: left;
+}
+.login-box:after {
+  clear: both;
+  content: '';
+}
+.lb-header {
+  color: #00415d;
+  margin: 15px 5px 10px 5px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+  height: 28px;
+}
+.lb-header a {
+  display: block;
+  padding: 15px;
+  text-decoration: none;
+  color: #999;
+  font-weight: normal;
+  font-size: 15px;
+  -webkit-transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+}
+.lb-header .active {
+  color: #fff;
+  font-size: 16px;
+}
+.tabs {
+  margin-left: 6rem;
+  background-color: #eee;
+  width: 60%;
+  display: inline-block;
+  box-sizing: border-box;
+  float: left;
+  min-height: 47px;
+}
+.tabs .active {
+  background-color: #0054a6;
+}
+.social-login {
+  float: left;
+  width: 100%;
+  height: auto;
+  margin: 10px auto;
+  padding: 10px 0 10px 0;
+  border-bottom: 1px solid #eee;
+  border-top: 1px solid #eee;
+}
+
+.email-login {
+  position: relative;
+  float: left;
+  width: 100%;
+  height: auto;
+  margin-top: 20px;
+  text-align: center;
+}
+.u-form-group {
+  width: 100%;
+  margin-bottom: 10px;
+}
+.u-form-group input[type='email'],
+.u-form-group input[type='password'] {
+  width: calc(50% - 22px);
+  height: 45px;
+  outline: none;
+  border: 1px solid #ddd;
+  padding: 0 10px;
+  border-radius: 2px;
+  color: #333;
+  font-size: 0.8rem;
+  -webkit-transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+}
+.u-form-group input:focus {
+  border-color: #358efb;
+}
+.u-form-group button {
+  width: 50%;
+  background-color: #1cb94e;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 14px;
+  font-weight: normal;
+  padding: 14px 0;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+.forgot-password {
+  width: 50%;
+  text-align: left;
+  text-decoration: underline;
+  color: #888;
+  font-size: 0.75rem;
+}
+
+.social-button input.btnIwhLogin {
+  background-color: #f7b734;
+  padding: 13px !important;
+  color: #060606;
+  font-size: 16px;
+  text-align: center !important;
+  outline: none;
+  border: none;
+  text-shadow: 0 0 #949494;
+  -webkit-appearance: none;
+  -webkit-appearance: none;
+}
+.social-button a,
+.social-button input {
+  text-decoration: none !important;
+  display: block;
+  margin: 15px auto;
+  cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+  width: 220px;
+  box-sizing: border-box;
+  box-shadow: 1px 2px 3px 1px #d6d6d6;
+  border-radius: 2px;
+  color: #fff;
+  font-size: 15px;
+  padding: 10px 15px 10px 10px;
+  text-align: left;
+  -webkit-transition: 0.2s all ease-in;
+  transition: 0.2s all ease-in;
+}
+.social-button a:hover,
+.social-button input:hover {
+  box-shadow: 1px 1px 1px 1px #eee;
+}
+
+.form-area {
+  display: block;
+}
+
+.login-heading {
+  color: #888;
+  font-size: 16px;
+  text-align: center;
+  margin: 10px auto 5px;
+  padding: 0px;
+  font-weight: 300;
+}
+.accountBlocks {
+  width: 452px;
+  margin: 0 auto;
+}
+
+.social-button a,
+.social-button input {
+  text-decoration: none !important;
+  display: block;
+  margin: 15px auto;
+  cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+  width: 220px;
+  box-sizing: border-box;
+  box-shadow: 1px 2px 3px 1px #d6d6d6;
+  border-radius: 2px;
+  color: #fff;
+  font-size: 15px;
+  padding: 10px 15px 10px 10px;
+  text-align: left;
+  -webkit-transition: 0.2s all ease-in;
+  transition: 0.2s all ease-in;
+}
+.btnGoogleLogin {
+  background-color: #db4437;
+}
+.gicon {
+  background-image: url(http://www.tequipment.net/cms/images/socialmedia/google-icon-1x.png);
+}
+.s-ico {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+.social-button:after {
+  clear: both;
+  content: '';
+}

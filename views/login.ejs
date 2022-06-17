@@ -1,13 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login Page</title>
-</head>
-<body>
-    Welcome!
-    <a href="/auth/google">login/sign up with google </a>
-</body>
+    <link rel="stylesheet" href="/css/login.css" />
+  </head>
+  <body>
+    <div class="login-wrap">
+      <div class="login-box">
+        <h2 class="login-heading">Welcome</h2>
+        <div class="lb-header">
+          <div class="tabs active">
+            <a href="#" class="active" id="login-box-link">Login</a>
+          </div>
+        </div>
+        <div class="form-area">
+          <form class="email-login">
+            <div class="u-form-group">
+              <input type="email" placeholder="Email" />
+            </div>
+            <div class="u-form-group">
+              <input type="password" placeholder="Password" />
+            </div>
+            <div class="u-form-group">
+              <div class="presentation-only">
+                <div class="social-button">
+                  <input
+                    type="submit"
+                    name="CT_Main_1$btnLogin"
+                    value="Sign in"
+                    onclick='javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions("CT_Main_1$btnLogin", "", true, "LoginCheckout", "", false, false)); PleaseWait(this);'
+                    id="CT_Main_1_btnLogin"
+                    class="btnIwhLogin myacc"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="u-form-group">
+              <a href="#" class="forgot-password">Forgot password?</a>
+            </div>
+          </form>
+        </div>
+        <div class="social-login">
+          <h2 class="login-heading">or login with:</h2>
+          <div class="accountBlocks accountBlockSocial">
+            <div class="social-button">
+              <a class="btnGoogleLogin google-auth" href="/auth/google"
+                ><span class="gicon s-ico"></span>Log in with Google</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

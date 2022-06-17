@@ -1,13 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home Page</title>
-    <a href="/" + <%= roomId %>> Click here to join a room</a>
-</head>
-<body>
-    
-</body>
+     <link rel="stylesheet" href="/css/home.css">
+  </head>
+  <body>
+    <div class="home-page">
+      <div className="header">
+        <div className="logo">
+          <img
+            src="https://www.gstatic.com/meet/google_meet_horizontal_wordmark_2020q4_1x_icon_124_40_2373e79660dabbf194273d27aa7ee1f5.png"
+            alt="logo"
+          />
+          <span className="help-text">Meet</span>
+        </div>
+        <button onClick="{handleClick}">Logout</button>
+        <div className="action-btn">
+          <!-- <FontAwesomeIcon className='icon-block' icon={faQuestionCircle} />
+        <FontAwesomeIcon className='icon-block' icon={faExclamationCircle} />
+        <FontAwesomeIcon className='icon-block' icon={faCog} /> -->
+        </div>
+      </div>
+      <div class="body">
+        <div class="left-side">
+          <div class="content">
+            <h2>Premium video meetings. Now free for everyone.</h2>
+            <p>
+              We re-engineered the service that we built for secure business
+              meetings, Google Meet, to make it free and available for all.
+            </p>
+            <div class="action-btn">
+              <a href="/" + <%="roomId" %>>
+                <button class="btn green">
+                  <!-- <FontAwesomeIcon className='icon-block' icon={faVideo} /> -->
+                  New Meeting
+                </button>
+              </a>
+
+              <div class="input-block">
+                <div class="input-section">
+                  <!-- <FontAwesomeIcon className='icon-block' icon={faKeyboard} /> -->
+                  <input type="text" placeholder="Enter a code or link" />
+                </div>
+                <button class="btn no-bg">Join</button>
+              </div>
+            </div>
+          </div>
+          <div class="help-text">
+            <a href="">Learn More</a> about Google Meet
+          </div>
+        </div>
+
+        <div class="right-side">
+          <div class="content">
+            <img
+              src="https://www.gstatic.com/meet/user_edu_get_a_link_light_90698cd7b4ca04d3005c962a3756c42d.svg"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
