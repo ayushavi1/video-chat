@@ -4,9 +4,7 @@ const myVideo = document.createElement("video");
 
 myVideo.muted = true;
 
-
-
-const userName = prompt("Enter your name");
+// const userName = prompt("Enter your name");
 
 const peer = new Peer(undefined, {
   host: "/",
@@ -50,7 +48,7 @@ const connectToNewUser = (userId, stream) => {
 };
 
 peer.on("open", (userId) => {
-  socket.emit("join-room", ROOM_ID, userId, userName);
+  socket.emit("join-room", ROOM_ID, NAME, GOOGLEID, PHOTO, userId);
 });
 
 const addVideoStream = (video, stream) => {

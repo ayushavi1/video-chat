@@ -41,15 +41,7 @@ app.use(
 app.get('/auth/google',
   passport.authenticate('google', { scope: ['profile'] }));
 
-app.get("/", (req, res) => {
-  const roomId = uuidv4();
-  res.redirect(`/${roomId}`);
-  const room = new Room({
-    roomId: roomId,
-    users: []
-  })
-  room.save();
-});
+
 
 
 app.use(passport.initialize());
@@ -75,7 +67,7 @@ passport.use(new GoogleStrategy({
     //   return cb(err, user);
     // });
     //console.log(profile);
-    //console.log(profile);
+    console.log(profile);
     return cb(null, profile);
   }
 ));
@@ -104,8 +96,8 @@ app.get('/auth/logout', (req, res) => {
 
 app.get("/home", (req, res) => {
   if (req.user) {
-    
-    res.render("home", { roomId:  uuidv4()});
+
+    res.render("home");
   }
   else {
     res.redirect('/auth/login');
@@ -115,7 +107,14 @@ app.get("/home", (req, res) => {
 
 app.get("/:room", (req, res) => {
   if (req.user) {
-    res.render("room", { roomId: req.params.room });
+    console.log("here", req.user);
+
+    res.render("room", {
+      roomId: req.params.room,
+      googleid: req.user.id,
+      name: req.user.displayName,
+      photo: req.user.photos[0].value,
+    });
   }
   else {
     res.redirect('/auth/login');
@@ -124,18 +123,40 @@ app.get("/:room", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  socket.on("join-room", (roomId, userId, userName) => {
+  socket.on("join-room", (roomId, name, googleid, photo, userId) => {
     socket.join(roomId);
     socket.to(roomId).emit("user-connected", userId);
     Room.findOne({ roomId: roomId }, function (err, foundRoom) {
       if (!err) {
-        foundRoom.users.push(userId);
+        console.log("here2", name, googleid, photo);
+        foundRoom.users.push({
+          peerid: userId,
+          id: googleid,
+          name: name,
+          photo: photo
+        });
         foundRoom.save();
       }
     })
-})
+  })
 });
 
+app.get("/", (req, res) => {
+  // console.log(req.user);
+  if (req.user) {
+    const roomId = uuidv4();
+    const room = new Room({
+      roomId: roomId,
+      users: []
+    })
+    room.save();
+    res.redirect("/" + roomId);
+  }
+  else {
+    res.redirect('/auth/login');
+  }
+
+});
 
 server.listen(process.env.PORT || 3000, function () {
   console.log(`Server running on port ${process.env.PORT}`.rainbow.bold);
