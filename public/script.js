@@ -6,6 +6,9 @@ myVideo.muted = true;
 
 // const userName = prompt("Enter your name");
 
+
+let peers={}
+
 const peer = new Peer(undefined, {
   host: "/",
   port: "3001",
@@ -23,6 +26,14 @@ navigator.mediaDevices
 
     peer.on("call", (call) => {
       call.answer(stream);
+      //connecting to all peers that where already in the meeting and called the new peer
+      call.on('close',()=>{
+        video.remove()
+    })
+      peer.connect(call.peer);
+      peers[call.peer]=call;
+      console.log(peers)
+
       const video = document.createElement("video");
       call.on("stream", (userVideoStream) => {
         addVideoStream(video, userVideoStream);
@@ -38,6 +49,11 @@ navigator.mediaDevices
     });
   });
 
+
+  socket.on('user-disconnected',userId=>{
+    if(peers[userId]) peers[userId].close()
+})
+
 const connectToNewUser = (userId, stream) => {
   console.log(userId);
   const call = peer.call(userId, stream);
@@ -45,10 +61,17 @@ const connectToNewUser = (userId, stream) => {
   call.on("stream", (userVideoStream) => {
     addVideoStream(video, userVideoStream);
   });
+  call.on('close',()=>{
+    video.remove()
+})
+peers[userId]=call; 
+console.log(peers)
+console.log(call);
 };
 
 peer.on("open", (userId) => {
   socket.emit("join-room", ROOM_ID, NAME, GOOGLEID, PHOTO, userId);
+
 });
 
 const addVideoStream = (video, stream) => {

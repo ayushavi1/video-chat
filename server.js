@@ -38,6 +38,7 @@ app.use(
 
 
 
+
 app.get('/auth/google',
   passport.authenticate('google', { scope: ['profile'] }));
 
@@ -138,7 +139,11 @@ io.on("connection", (socket) => {
         foundRoom.save();
       }
     })
+    socket.on('disconnect',()=>{
+      socket.to(roomId).emit('user-disconnected',userId)
   })
+  })
+  
 });
 
 app.get("/", (req, res) => {
