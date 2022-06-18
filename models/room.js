@@ -5,6 +5,7 @@ const mongoose = require("mongoose")
 
 const roomSchema = new mongoose.Schema({
     roomId: String,
+    currentusers: Number,
     users: [{
         peerid: String,
         id: String,

@@ -95,6 +95,7 @@ app.get("/create-meeting", (req,res)=>{
     const roomId = uuidv4();
     const room = new Room({
       roomId: roomId,
+      currentusers: 0,
       users: []
     })
     room.save().then(()=>{
@@ -146,10 +147,30 @@ io.on("connection", (socket) => {
           name: name,
           photo: photo
         });
+        foundRoom.currentusers= foundRoom.currentusers+1;
         foundRoom.save();
       }
     })
     socket.on('disconnect',()=>{
+      Room.findOne({ roomId: roomId }, function (err, foundRoom) {
+        if (!err) {
+            foundRoom.users.map((user)=>{
+              if(user.peerid==userId){
+                if(foundRoom.currentusers===1) {Room.deleteOne({roomId:roomId})
+                .then(
+                    (success)=>{
+                      console.log(success);
+                    }
+                ).catch((err)=>{
+                  console.log(err);
+
+                })
+                }
+                else {foundRoom.currentusers= foundRoom.currentusers-1; foundRoom.save(); }
+              }
+            })
+        } 
+      })
       socket.to(roomId).emit('user-disconnected',userId)
   })
   })
