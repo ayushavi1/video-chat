@@ -106,6 +106,7 @@ app.get("/home", (req, res) => {
 
 });
 
+
 app.get("/:room", (req, res) => {
   if (req.user) {
     console.log("here", req.user);
@@ -146,7 +147,8 @@ io.on("connection", (socket) => {
   
 });
 
-app.get("/", (req, res) => {
+
+app.get("/create-room", (req, res) => {
   // console.log(req.user);
   if (req.user) {
     const roomId = uuidv4();
@@ -162,6 +164,10 @@ app.get("/", (req, res) => {
   }
 
 });
+
+app.get("/", (req, res, next) => {
+  res.redirect("/home");
+})
 
 server.listen(process.env.PORT || 3000, function () {
   console.log(`Server running on port ${process.env.PORT}`.rainbow.bold);
