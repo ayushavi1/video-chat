@@ -32,7 +32,8 @@ app.use(
     maxAge: 24 * 60 * 60 * 1000
   })
 );
-
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
 
 
 
@@ -61,7 +62,7 @@ passport.use(new GoogleStrategy({
   callbackURL: "/auth/google/callback"
 },
   function (accessToken, refreshToken, profile, cb) {
-    
+
     console.log(profile);
     return cb(null, profile);
   }
@@ -90,7 +91,7 @@ app.get('/auth/logout', (req, res) => {
 })
 
 
-app.get("/create-meeting", (req,res)=>{
+app.get("/create-meeting", (req, res) => {
   if (req.user) {
     const roomId = uuidv4();
     const room = new Room({
@@ -98,9 +99,10 @@ app.get("/create-meeting", (req,res)=>{
       currentusers: 0,
       users: []
     })
-    room.save().then(()=>{
-    res.redirect("/" + roomId);
-})}
+    room.save().then(() => {
+      res.redirect("/" + roomId);
+    })
+  }
   else {
     res.redirect('/auth/login');
   }
@@ -147,35 +149,50 @@ io.on("connection", (socket) => {
           name: name,
           photo: photo
         });
-        foundRoom.currentusers= foundRoom.currentusers+1;
+        foundRoom.currentusers = foundRoom.currentusers + 1;
         foundRoom.save();
       }
     })
-    socket.on('disconnect',()=>{
+    socket.on('disconnect', () => {
       Room.findOne({ roomId: roomId }, function (err, foundRoom) {
         if (!err) {
-            foundRoom.users.map((user)=>{
-              if(user.peerid==userId){
-                if(foundRoom.currentusers===1) {Room.deleteOne({roomId:roomId})
-                .then(
-                    (success)=>{
+          foundRoom.users.map((user) => {
+            if (user.peerid == userId) {
+              if (foundRoom.currentusers === 1) {
+                Room.deleteOne({ roomId: roomId })
+                  .then(
+                    (success) => {
                       console.log(success);
                     }
-                ).catch((err)=>{
-                  console.log(err);
+                  ).catch((err) => {
+                    console.log(err);
 
-                })
-                }
-                else {foundRoom.currentusers= foundRoom.currentusers-1; foundRoom.save(); }
+                  })
               }
-            })
-        } 
+              else { foundRoom.currentusers = foundRoom.currentusers - 1; foundRoom.save(); }
+            }
+          })
+        }
       })
-      socket.to(roomId).emit('user-disconnected',userId)
+      socket.to(roomId).emit('user-disconnected', userId)
+    })
   })
-  })
-  
+
 });
+
+app.post("/join", (req, res) => {
+  if (req.user) {
+    const meeting = req.body.meeting;
+    if (meeting.includes('/'))
+      res.redirect("/" + meeting.substr(meeting.length - 36, 36));
+    else
+      res.redirect("/" + meeting);
+  }
+  else {
+    res.redirect('/auth/login');
+  }
+})
+
 
 app.get("/", (req, res) => {
   if (req.user) {
