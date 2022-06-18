@@ -18,14 +18,11 @@ const io = require("socket.io")(server, {
     origin: '*'
   }
 });
-// const { ExpressPeerServer } = require("peer");
-// const peerServer = ExpressPeerServer(server, {
 
-//   debug: true,
-// });
+
 const connectDB = require('./config/db');
 connectDB();
-// app.use("/peerjs", peerServer);
+
 app.use(express.static("public"));
 app.use(
   session({
@@ -64,10 +61,7 @@ passport.use(new GoogleStrategy({
   callbackURL: "/auth/google/callback"
 },
   function (accessToken, refreshToken, profile, cb) {
-    // User.findOrCreate({ googleId: profile.id }, function (err, user) {
-    //   return cb(err, user);
-    // });
-    //console.log(profile);
+    
     console.log(profile);
     return cb(null, profile);
   }
@@ -95,6 +89,22 @@ app.get('/auth/logout', (req, res) => {
   }
 })
 
+
+app.get("/create-meeting", (req,res)=>{
+  if (req.user) {
+    const roomId = uuidv4();
+    const room = new Room({
+      roomId: roomId,
+      users: []
+    })
+    room.save().then(()=>{
+    res.redirect("/" + roomId);
+})}
+  else {
+    res.redirect('/auth/login');
+  }
+})
+
 app.get("/home", (req, res) => {
   if (req.user) {
 
@@ -105,7 +115,6 @@ app.get("/home", (req, res) => {
   }
 
 });
-
 
 app.get("/:room", (req, res) => {
   if (req.user) {
@@ -147,17 +156,9 @@ io.on("connection", (socket) => {
   
 });
 
-
-app.get("/create-room", (req, res) => {
-  // console.log(req.user);
+app.get("/", (req, res) => {
   if (req.user) {
-    const roomId = uuidv4();
-    const room = new Room({
-      roomId: roomId,
-      users: []
-    })
-    room.save();
-    res.redirect("/" + roomId);
+    res.redirect('/home');
   }
   else {
     res.redirect('/auth/login');
@@ -165,11 +166,6 @@ app.get("/create-room", (req, res) => {
 
 });
 
-app.get("/", (req, res, next) => {
-  res.redirect("/home");
-})
-
 server.listen(process.env.PORT || 3000, function () {
   console.log(`Server running on port ${process.env.PORT}`.rainbow.bold);
 })
-
