@@ -1,0 +1,343 @@
+.video-container{
+        height: 100vh;
+        width: 100%;
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+}
+
+
+/* Call Page Footer */
+
+.footer-item {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90px;
+    background: #fff;
+    z-index: 1;
+}
+.footer-item .left-item {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    width: 350px;
+}
+.footer-item .left-item .icon-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 20px;
+}
+.footer-item .left-item .icon-block .icon {
+    margin-left: 10px;
+    font-size: 20px;
+}
+.footer-item .left-item .icon-block:hover {
+    cursor: pointer;
+    background: #eee;
+}
+.footer-item .center-item {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.footer-item .center-item .icon-block {
+    background: #fff;
+    border: 1px solid #dfdfdf;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    border-radius: 50%;
+    margin: 0 10px;
+}
+.footer-item .center-item .icon-block .icon {
+    color: #555;
+    font-size: 20px;
+}
+.footer-item .center-item .icon-block .icon.red {
+    color: #d93025;
+}
+.footer-item .center-item .icon-block:hover {
+    cursor: pointer;
+    box-shadow: 0 0 10px #ddd;
+}
+.footer-item .center-item .icon-block.red-bg {
+    background: #d93025;
+}
+.footer-item .center-item .icon-block.red-bg .icon {
+    color: #fff;
+}
+.footer-item .right-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    width: 350px;
+}
+.footer-item .right-item .icon-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    width: 146px;
+    color: #555;
+}
+.footer-item .right-item .icon-block .icon {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.footer-item .right-item .icon-block .title {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+}
+.footer-item .right-item .icon-block:hover {
+    cursor: pointer;
+    background: #eee;
+}
+
+
+/* Call Page Header */
+
+.frame-header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 350px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #fff;
+    border-radius: 0 0 0 10px;
+    overflow: hidden;
+
+}
+.frame-header .header-items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    flex: 1;
+    border-right: 1px solid #f5f5f5;
+    position: relative;
+}
+.frame-header .header-items .alert-circle-icon {
+    position: absolute;
+    background: #04796a;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    top: 10px;
+    right: 20px;
+}
+.frame-header .header-items.date-block {
+    font-size: 22px;
+    color: #5f6368;
+    min-width: 120px;
+    font-weight: 400;
+}
+.frame-header .header-items.icon-block .icon {
+    color: #505357;
+    font-size: 22px;
+}
+.frame-header .header-items.icon-block .icon.profile {
+    font-size: 32px;
+    color: #04796a;
+}
+.frame-header .header-items.icon-block:hover {
+    cursor: pointer;
+    background: #eee;
+}
+
+/* Meeting Info */
+
+.meeting-info-block {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 25px;
+    width: 310px;
+}
+.meeting-info-block .meeting-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #222;
+}
+.meeting-info-block .meeting-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 400;
+}
+.meeting-info-block .meeting-header .icon {
+    cursor: pointer;
+    font-size: 20px;
+}
+.meeting-info-block .add-people-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #04796a;
+    color: #fff;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    margin-top: 20px;
+}
+.meeting-info-block .add-people-btn .icon {
+    font-size: 12px;
+    margin-right: 10px;
+}
+.meeting-info-block .info-text {
+    color: #222;
+    font-size: 14px;
+}
+.meeting-info-block .meet-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f1f3f5;
+    padding: 15px;
+    border-radius: 5px;
+}
+.meeting-info-block .meet-link span {
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    background: none;
+    color: #555;
+    flex: 1;
+}
+.meeting-info-block .meet-link .icon {
+    cursor: pointer;
+    color: #555;
+}
+.meeting-info-block .permission-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.meeting-info-block .permission-text .icon {
+    color: #4385f4;
+    font-size: 20px;
+    margin-right: 10px;
+}
+.meeting-info-block .small-text {
+    font-size: 13px;
+    color: #222;
+}
+
+/* Messanger */
+
+.messenger-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #fff;
+    height: calc(100vh - 90px);
+    width: 350px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.messenger-container .messenger-header {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+.messenger-container .messenger-header h3 {
+    margin: 0;
+    font-weight: 400;
+}
+.messenger-container .messenger-header .icon {
+    cursor: pointer;
+    font-size: 20px;
+}
+.messenger-container .messenger-header-tabs {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+.messenger-container .messenger-header-tabs .tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    color: #555;
+}
+.messenger-container .messenger-header-tabs .tab p {
+    margin-left: 10px;
+}
+.messenger-container .messenger-header-tabs .tab.active {
+    color: #04796a;
+    border-bottom: 2px solid #04796a;
+}
+.messenger-container .messenger-header-tabs .tab:hover {
+    cursor: pointer;
+    background: rgba(0, 121, 107, 0.039);
+}
+.messenger-container .chat-section {
+    padding: 20px;
+    flex: 1;
+    overflow-y: scroll;
+}
+.messenger-container .chat-section .chat-block {
+    margin-bottom: 30px;
+}
+.messenger-container .chat-section .chat-block .sender {
+    font-weight: 500;
+    font-size: 14px;
+}
+.messenger-container .chat-section .chat-block .sender small {
+    margin-left: 5px;
+    font-weight: 300;
+}
+.messenger-container .chat-section .chat-block .msg {
+    font-size: 14px;
+    margin: 0;
+    color: #555;
+    padding-top: 5px;
+}
+.messenger-container .send-msg-section {
+    padding: 20px;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #555;
+}
+.messenger-container .send-msg-section input {
+    padding: 5px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #eee;
+    width: 80%;
+}
+.messenger-container .send-msg-section .icon {
+    cursor: pointer;
+}
+.messenger-container .send-msg-section .icon:hover {
+    color: #04796a;
+}
