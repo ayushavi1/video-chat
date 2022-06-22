@@ -45,146 +45,11 @@
     </script>
 
     <title>Document</title>
-    <style>
-      /* #video-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, 300px);
-        grid-auto-rows: 300px;
-      } */
-
-      /* video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      } */
-    </style>
+    
   </head>
 
   <body>
-    <!-- <div class="video-container">
-        <div id="video-grid">              </div>
-        <div class='footer-item'>
-            <div class='left-item'>
-              <div class='icon-block'>
-                Meeting details
-                <FontAwesomeIcon class='icon' icon={faAngleUp} />
-              </div>
-            </div>
-            <div class='center-item'>
-              <div class="">
-                Mic
-                <FontAwesomeIcon class='icon' icon={isAudio ? faMicrophone  : faMicrophoneSlash} />
-              </div>
-              <div class='icon-block'>
-                Call
-                <FontAwesomeIcon class='icon red' icon={faPhone} />
-              </div>
-              <div class='icon-block'>
-                Video
-                <FontAwesomeIcon class='icon' icon={faVideo} />
-              </div>
-            </div>
-            <div class='right-item'>
-              <div class='icon-block'>
-                <FontAwesomeIcon class='icon red' icon={faClosedCaptioning} />
-                <p class='title'>Turn on captions</p>
-              </div>
-
-              <div class='icon-block' >
-                <FontAwesomeIcon class='icon red' icon={faDesktop} />
-                <p class='title'>Stop Presenting</p>
-              </div>
-             <div class='icon-block' >
-                <FontAwesomeIcon class='icon red' icon={faDesktop} />
-                <p class='title'>Present now</p>
-              </div>
-            </div>
-          </div>
-          <div class='frame-header'>
-            <div class='header-items icon-block'>
-                People
-              <FontAwesomeIcon class='icon' icon={faUserFriends} />
-            </div>
-            <div class='header-items icon-block' >
-                Chat
-              <FontAwesomeIcon class='icon' icon={faCommentAlt} />
-              {!isMessenger && messageAlert.alert && (<span class="alert-circle-icon"></span>)}      
-              </div>
-            <div class='header-items date-block'>1:00 PM</div>
-            <div class='header-items icon-block'>
-                User
-              <FontAwesomeIcon class='icon profile' icon={faUserCircle} />
-            </div>
-          </div>
-          <div class='meeting-info-block'>
-            <div class='meeting-header'>
-              <h3>Your meeting's ready</h3>
-              Cancel Icon
-              <FontAwesomeIcon class='icon' icon={faTimes} onClick={()=>setMeetingInfo(false)}/>
-            </div>
-            <button class='add-people-btn'>
-              <FontAwesomeIcon class='icon' icon={faUser} />
-              Add Others
-            </button>
-            <p class='info-text'>
-              Or share this meeting link with others that you want in the meeting
-            </p>
-            <div class='meet-link'>
-              <span>{"url"}</span>
-              <FontAwesomeIcon class='icon' icon={faCopy} onClick={()=>navigator.clipboard.writeText(url)}/>
-            </div>
-            <div class='permission-text'>
-              <FontAwesomeIcon class='icon' icon={faShieldAlt} />
-              <p class='small-text'>
-                People who use this meeting link must get your permission before they
-                can join.
-              </p>
-            </div>
-            <p class='small-text'>Joined as ayush@gmail.com</p>
-          </div>
-          <div class='messenger-container'>
-            <div class='messenger-header'>
-              <h3>Meeting Details</h3>
-              Cancel Icon
-              <FontAwesomeIcon class='icon' icon={faTimes} onClick={()=>setIsMessenger(false)}/>
-            </div>
-            <div class='messenger-header-tabs'>
-              <div class='tab'>
-                <FontAwesomeIcon class='icon' icon={faUserFriends} />
-                <p>People (1)</p>
-              </div>
-              <div class='tab active'>
-                <FontAwesomeIcon class='icon' icon={faCommentAlt} />
-                <p>Chat</p>
-              </div>
-            </div>
-      
-            <div class="chat-section">
-              {messageList.map((item) => (
-                <div key={item.time} class="chat-block">
-                  <div class="sender">
-                    {item.user} <small>{formatDate(item.time)}</small>
-                  </div>
-                  <p class="msg">{item.msg}</p>
-                </div>
-              ))}
-              Messages will be shown here
-            </div>
-            <div class='send-msg-section'>
-              <input placeholder='Send message to everyone' />
-                <button>Send</button>
-              <FontAwesomeIcon class='icon' icon={faPaperPlane} onClick={handleSendMsg}/>
-            </div>
-          </div>
-    </div> -->
-    <!-- <div class="header">
-      <div class="logo">
-        <div class="header__back">
-          <i class="fas fa-angle-left"></i>
-        </div>
-        <h3>Video Chat</h2>
-      </div>
-    </div>   -->
+   
     <div class="main">
       <div class='meeting-info-block' id="info_component">
         <div class='meeting-header'>
@@ -208,7 +73,7 @@
           Or share this meeting link with others that you want in the meeting
         </p>
         <div class='meet-link'>
-          <span>"01a201f0-5235-4831-9c5c-daf13c81d810"</span>
+          <span>"---ROOMID---"</span>
           <!-- <FontAwesomeIcon class='icon' icon={faCopy} onClick={()=>navigator.clipboard.writeText(url)}/> -->
         </div>
         <div class='permission-text'>
@@ -221,6 +86,9 @@
         <p class='small-text'>Joined as ayush@gmail.com</p>
       </div>
       <div class="main__top">
+        <div id="screen">
+          <video id="screen-video" autoplay ></video>
+      </div>
         <div class="videos__group">
           <div id="video-grid"></div>
         </div>
