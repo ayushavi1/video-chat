@@ -4,8 +4,7 @@ const videoGroup = document.querySelector(".videos__group");
 const videoGrid = document.getElementById("video-grid");
 const myVideo = document.createElement("video");
 
-const showChat = document.querySelector("#showChat");
-const backBtn = document.querySelector(".header__back");
+
 
 const startShare = document.getElementById("presentButton");
 const stopShare = document.getElementById("stoppresentButton");
@@ -17,15 +16,21 @@ const inviteButton = document.querySelector("#inviteButton");
 const muteButton = document.querySelector("#muteButton");
 const stopVideo = document.querySelector("#stopVideo");
 
+const leave = document.querySelector("#leaveButton")
+
 let text = document.querySelector("#chat_message");
 let send = document.getElementById("send");
 let messages = document.querySelector(".messages");
 
-document.querySelector(".meet-link").innerHTML=`${ROOM_ID}`;
-document.querySelector(".small-text").innerHTML=`Joined as ${NAME}`;
+let people = document.querySelector(".people");
+
+document.querySelector(".meet-link").innerHTML = `${ROOM_ID}`;
+document.querySelector(".small-text").innerHTML = `Joined as ${NAME}`;
 
 var myUserId = "";
 var myName = "";
+var screenSharer = "";
+
 
 myVideo.muted = true;
 var myscreen = null;
@@ -46,6 +51,8 @@ const peer = new Peer(undefined, {
   port: "3001",
 });
 
+
+
 let myVideoStream;
 navigator.mediaDevices
   .getUserMedia({
@@ -53,6 +60,7 @@ navigator.mediaDevices
     video: true,
   })
   .then((stream) => {
+    console.log(stream);
     myVideoStream = stream;
     addVideoStream(myVideo, stream);
 
@@ -67,8 +75,14 @@ navigator.mediaDevices
 
         peer.connect(call.peer);
         peers[call.peer] = call;
-        console.log(peers)
-
+        console.log(peers);
+        console.log(call.metadata.name);
+        people.innerHTML =
+          people.innerHTML +
+          `<div class="person">
+            <b><i class="far fa-user-circle"></i> <span style="color:black;"> ${call.metadata.name
+          }</span> </b>
+        </div>`;
         const video = document.createElement("video");
         call.on("stream", (userVideoStream) => {
           addVideoStream(video, userVideoStream);
@@ -87,6 +101,7 @@ navigator.mediaDevices
       else {
 
         call.answer();
+        screenSharer = call.peer;
         call.on("stream", (screensrc) => {
           screendiv.style.display = "flex";
           console.log(screensrc)
@@ -96,12 +111,20 @@ navigator.mediaDevices
       }
     });
 
-    socket.on("user-connected", (userId) => {
+    socket.on("user-connected", (userId, userName) => {
+
       setTimeout(() => {
         console.log("User connected: " + userId)
         // user joined
-        connectToNewUser(userId, stream)
+        connectToNewUser(userId, myName, stream)
       }, 1000)
+      people.innerHTML =
+        people.innerHTML +
+        `<div class="person">
+            <b><i class="far fa-user-circle"></i> <span style="color:black;"> ${userName
+        }</span> </b>
+           
+        </div>`;
     });
   });
 
@@ -116,12 +139,20 @@ socket.on("createMessage", (message, userId, userName) => {
 });
 
 socket.on('user-disconnected', userId => {
-  if (peers[userId]) peers[userId].close()
+
+  if (peers[userId]) {
+    if (screenSharer === userId) {
+      screendiv.style.display = "none";
+      screen.srcObject = null;
+      startShare.style.display = "block";
+    }
+    peers[userId].close();
+  }
 })
 
-const connectToNewUser = (userId, stream) => {
+const connectToNewUser = (userId, myName, stream) => {
   console.log(userId);
-  const call = peer.call(userId, stream, { metadata: { "type": "video" } });
+  const call = peer.call(userId, stream, { metadata: { "type": "video", "name": myName } });
   const video = document.createElement("video");
   call.on("stream", (userVideoStream) => {
     addVideoStream(video, userVideoStream);
@@ -140,6 +171,13 @@ peer.on("open", (userId) => {
   socket.emit("join-room", ROOM_ID, NAME, GOOGLEID, PHOTO, userId);
   myName = NAME;
   myUserId = userId;
+  people.innerHTML =
+    people.innerHTML +
+    `<div class="person">
+        <b><i class="far fa-user-circle"></i> <span style="color:black;"> ${myName
+    }</span> </b>
+       
+    </div>`;
 });
 
 
@@ -247,6 +285,12 @@ stopVideo.addEventListener("click", () => {
     stopVideo.innerHTML = html;
   }
 });
+
+
+leave.addEventListener("click", () => {
+  socket.disconnect();
+  window.location.pathname = '/home'
+})
 
 // inviteButton.addEventListener("click", (e) => {
 //   prompt(

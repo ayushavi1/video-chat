@@ -139,7 +139,7 @@ app.get("/:room", (req, res) => {
 io.on("connection", (socket) => {
   socket.on("join-room", (roomId, name, googleid, photo, userId) => {
     socket.join(roomId);
-    socket.to(roomId).emit("user-connected", userId);
+    socket.to(roomId).emit("user-connected", userId, name);
     Room.findOne({ roomId: roomId }, function (err, foundRoom) {
       if (!err) {
         console.log("here2", name, googleid, photo);
