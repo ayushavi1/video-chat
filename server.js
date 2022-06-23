@@ -8,7 +8,8 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const dotenv = require('dotenv');
 const session = require('express-session');
-const Room = require("./models/room")
+const Room = require("./models/room");
+const { sendMail } = require('./Utils/email');
 dotenv.config({ path: './config.env' });
 
 
@@ -63,7 +64,7 @@ passport.use(new GoogleStrategy({
 },
   function (accessToken, refreshToken, profile, cb) {
 
-    console.log(profile);
+    //console.log(profile);
     return cb(null, profile);
   }
 ));
@@ -111,7 +112,9 @@ app.get("/create-meeting", (req, res) => {
 app.get("/home", (req, res) => {
   if (req.user) {
 
-    res.render("home");
+    var today = new Date();
+    var future = new Date(today.getTime() + 60000 * 15 ).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    res.render("home", { curTime: future });
   }
   else {
     res.redirect('/auth/login');
@@ -121,7 +124,7 @@ app.get("/home", (req, res) => {
 
 app.get("/:room", (req, res) => {
   if (req.user) {
-    console.log("here", req.user);
+    //console.log("here", req.user);
 
     res.render("room", {
       roomId: req.params.room,
@@ -206,6 +209,35 @@ app.get("/", (req, res) => {
     res.redirect('/auth/login');
   }
 
+});
+
+app.post('/schedule-meeting',(req, res) => {
+  if (req.user) {
+    //console.log(req.body);
+    const userDetails = { 
+      userEmail: req.body.emailAddresses.split(',')
+    }
+    // calculate time difference
+    let [h, m] = req.body.meetingTime.split(':')
+    let [curh, curm] = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }).split(':');
+    h = parseInt(h);
+    m = parseInt(m);
+    curh = parseInt(curh);
+    curm = parseInt(curm);
+    let seconds = 0;
+    if (h*60 + m > curh*60 + curm + 15) {
+      seconds = (h*60 + m - curh*60 - curm - 15)*60;
+    }
+    else {
+      seconds = (h*60 + m + curh*60 + curm - 15)*60;
+    }
+    setTimeout(() => sendMail(userDetails), seconds * 1000);
+
+    res.redirect('/home');
+  }
+  else {
+    res.redirect('/auth/login');
+  }
 });
 
 server.listen(process.env.PORT || 3000, function () {
