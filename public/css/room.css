@@ -395,6 +395,12 @@ video {
   background-color: var(--main-dark);
 }
 
+/* mirror bug resolved */
+#screen {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+
 #screen-video{
   display: flex;
   justify-content: center;
