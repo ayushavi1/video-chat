@@ -4,7 +4,9 @@ const videoGroup = document.querySelector(".videos__group");
 const videoGrid = document.getElementById("video-grid");
 const myVideo = document.createElement("video");
 
-
+const recordbtn=document.getElementById("recordButton");
+const stoprecord=document.getElementById("stoprecordButton");
+let mediaRecorder;
 
 const startShare = document.getElementById("presentButton");
 const stopShare = document.getElementById("stoppresentButton");
@@ -35,6 +37,7 @@ var screenSharer = "";
 myVideo.muted = true;
 var myscreen = null;
 var screenshared = false;
+var recording=false;
 let peers = {}
 var displayMediaOptions = {
   video: {
@@ -207,6 +210,46 @@ function stopCapture(evt) {
   screen.srcObject = null;
 }
 
+function createRecorder (stream, mimeType) {
+  let recordedChunks = []; 
+  const mediaRecorder = new MediaRecorder(stream);
+  mediaRecorder.ondataavailable = function (e) {
+    if (e.data.size > 0) {
+      recordedChunks.push(e.data);
+    }  
+  };
+  mediaRecorder.onstop = function () {
+    let tracks = stream.getTracks();
+  tracks.forEach(track => track.stop());
+     saveFile(recordedChunks);
+     recordedChunks = [];
+  };
+  mediaRecorder.start(200); // For every 200ms the stream data will be stored in a separate chunk.
+  return mediaRecorder;
+}
+
+function saveFile(recordedChunks){
+  const blob = new Blob(recordedChunks, {
+     type: 'video/webm'
+   });
+   let filename = window.prompt('Enter file name'),
+       downloadLink = document.createElement('a');
+   downloadLink.href = URL.createObjectURL(blob);
+   downloadLink.download = `${filename}.webm`;
+   document.body.appendChild(downloadLink);
+   downloadLink.click();
+   URL.revokeObjectURL(blob); // clear from memory
+   document.body.removeChild(downloadLink);
+}
+
+async function recordScreen() {
+  recording=true;
+  return await navigator.mediaDevices.getDisplayMedia({
+      audio: true, 
+      video: { mediaSource: "screen"}
+  });
+}
+
 
 startShare.addEventListener("click", async () => {
 
@@ -238,9 +281,22 @@ stopShare.addEventListener("click", () => {
 
 })
 
-console.log(send);
+recordbtn.addEventListener('click', async function(){
+  let stream = await recordScreen();
+  let mimeType = 'video/webm';
+  mediaRecorder = createRecorder(stream, mimeType);
+  recordbtn.style.display="none";
+  stoprecord.style.display="block";
+})
+
+stoprecord.addEventListener('click', function(){
+  mediaRecorder.stop();
+  recordbtn.style.display="block";
+  stoprecord.style.display="none";
+})
+
+
 send.addEventListener("click", (e) => {
-  console.log("hi");
   if (text.value.length !== 0) {
     socket.emit("message", text.value, myUserId, myName);
     text.value = "";
@@ -288,14 +344,9 @@ stopVideo.addEventListener("click", () => {
 
 
 leave.addEventListener("click", () => {
+  if(recording) mediaRecorder.stop();
   socket.disconnect();
   window.location.pathname = '/home'
 })
 
-// inviteButton.addEventListener("click", (e) => {
-//   prompt(
-//     "Copy this link and send it to people you want to meet with",
-//     window.location.href
-//   );
-// });
 

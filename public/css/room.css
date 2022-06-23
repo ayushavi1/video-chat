@@ -427,3 +427,11 @@ video {
 #stoppresentButton {
   display: none;
 }
+
+#stoprecordButton{
+  display: none;
+}
+
+#stopwhiteboardButton{
+  display: none;
+}
