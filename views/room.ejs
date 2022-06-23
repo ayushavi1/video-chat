@@ -10,10 +10,11 @@
       const ROOM_ID = "<%= roomId %>";
       console.log(ROOM_ID);
       const NAME = "<%= name%>";
-      console.log(ROOM_ID);
+      console.log(NAME);
       const GOOGLEID = "<%= googleid%>";
-      console.log(ROOM_ID);
+      console.log(GOOGLEID);
       const PHOTO = "<%= photo%>";
+
     </script>
 
     <script
@@ -73,7 +74,7 @@
           Or share this meeting link with others that you want in the meeting
         </p>
         <div class='meet-link'>
-          <span>"---ROOMID---"</span>
+          <!-- <span id="meeting-room-code"></span> -->
           <!-- <FontAwesomeIcon class='icon' icon={faCopy} onClick={()=>navigator.clipboard.writeText(url)}/> -->
         </div>
         <div class='permission-text'>
@@ -83,7 +84,7 @@
             can join.
           </p>
         </div>
-        <p class='small-text'>Joined as ayush@gmail.com</p>
+        <p class='small-text'></p>
       </div>
       <div class="main__top">
         <div id="screen">
@@ -130,7 +131,8 @@
               placeholder="Type message here..."
             />
             <div id="send" class="send__button">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"  viewBox="0 0 512 512"><path d="M511.6 36.86l-64 415.1c-1.5 9.734-7.375 18.22-15.97 23.05c-4.844 2.719-10.27 4.097-15.68 4.097c-4.188 0-8.319-.8154-12.29-2.472l-122.6-51.1l-50.86 76.29C226.3 508.5 219.8 512 212.8 512C201.3 512 192 502.7 192 491.2v-96.18c0-7.115 2.372-14.03 6.742-19.64L416 96l-293.7 264.3L19.69 317.5C8.438 312.8 .8125 302.2 .0625 289.1s5.469-23.72 16.06-29.77l448-255.1c10.69-6.109 23.88-5.547 34 1.406S513.5 24.72 511.6 36.86z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"  viewBox="0 0 512 512">
+                <path d="M511.6 36.86l-64 415.1c-1.5 9.734-7.375 18.22-15.97 23.05c-4.844 2.719-10.27 4.097-15.68 4.097c-4.188 0-8.319-.8154-12.29-2.472l-122.6-51.1l-50.86 76.29C226.3 508.5 219.8 512 212.8 512C201.3 512 192 502.7 192 491.2v-96.18c0-7.115 2.372-14.03 6.742-19.64L416 96l-293.7 264.3L19.69 317.5C8.438 312.8 .8125 302.2 .0625 289.1s5.469-23.72 16.06-29.77l448-255.1c10.69-6.109 23.88-5.547 34 1.406S513.5 24.72 511.6 36.86z"/></svg>
             </div>
           </div>
          </div>
@@ -204,5 +206,8 @@
         </div>
       </div>
     </div>
+    <script>
+
+    </script>
   </body>
 </html>

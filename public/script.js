@@ -21,6 +21,9 @@ let text = document.querySelector("#chat_message");
 let send = document.getElementById("send");
 let messages = document.querySelector(".messages");
 
+document.querySelector(".meet-link").innerHTML=`${ROOM_ID}`;
+document.querySelector(".small-text").innerHTML=`Joined as ${NAME}`;
+
 var myUserId = "";
 var myName = "";
 
@@ -106,7 +109,7 @@ socket.on("createMessage", (message, userId, userName) => {
   messages.innerHTML =
     messages.innerHTML +
     `<div class="message">
-          <b><i class="far fa-user-circle"></i> <span> ${userId === myUserId ? "me" : userName
+          <b><i class="far fa-user-circle"></i> <span style="color:black;"> ${userId === myUserId ? "me" : userName
     }</span> </b>
           <span>${message}</span>
       </div>`;
