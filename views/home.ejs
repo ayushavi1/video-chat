@@ -50,8 +50,21 @@
             </form>
           </div>
         </div>
-        <div class="help-text">
-          <a href="">Learn More</a> about Google Meet
+        <div class="schedule">
+          Schedule a Meeting
+          <form action="/schedule-meeting" method="post">
+            <label for="meeting">Choose a time for your meeting:</label>
+
+            <input type="time" id="meeting" name="meetingTime"
+                   min=<%=curTime %>  max="23:59" required>
+                   <br><br>
+            <label for="recepients">Enter number of recepients</label>
+            <input type="number" name="recepients" min="1" max="20" required>
+            <br><br>
+            <label for="email" name="emailAddresses" required>Enter email addresses separated by a comma</label>
+            <input type="email" name="emailAddresses" multiple>
+            <input type="submit" />
+          </form>
         </div>
       </div>
 
