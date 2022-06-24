@@ -287,6 +287,12 @@ video {
   border-radius: 5px;
 }
 
+#meeting-room-code{
+  border: none;
+}
+#meeting-room-code:focus{
+  border: none;
+}
 
 
 #showChat {
@@ -305,6 +311,7 @@ video {
 /* Meeting Info */
 
 .meeting-info-block {
+  z-index: 10;
   position: absolute;
   top: 50px;
   left: 50px;
@@ -477,4 +484,9 @@ video {
 }
 .color.yellow {
   background-color: yellow;
+}
+
+.userimg{
+  border-radius: 50%;
+  width: 30px;
 }
