@@ -134,7 +134,7 @@ app.get('/:room', (req, res) => {
 io.on('connection', (socket) => {
   socket.on('join-room', (roomId, name, googleid, photo, userId) => {
     socket.join(roomId);
-    socket.to(roomId).emit('user-connected', userId, name);
+    socket.to(roomId).emit('user-connected', userId, name, photo);
     Room.findOne({ roomId: roomId }, function (err, foundRoom) {
       if (!err) {
         console.log('here2', name, googleid, photo);
@@ -172,8 +172,8 @@ io.on('connection', (socket) => {
       socket.to(roomId).emit('user-disconnected', userId);
     });
 
-    socket.on('message', (message, userId, userName) => {
-      io.to(roomId).emit('createMessage', message, userId, userName);
+    socket.on('message', (message, userId, userName, userPhoto) => {
+      io.to(roomId).emit('createMessage', message, userId, userName,userPhoto);
     });
 
     socket.on('start-whiteboard', () => {
