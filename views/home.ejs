@@ -11,18 +11,19 @@
 
 <body>
   <div class="home-page">
-    <div className="header">
-      <div className="logo">
+    <div class="header">
+      <div class="logo">
         <img
           src="https://www.gstatic.com/meet/google_meet_horizontal_wordmark_2020q4_1x_icon_124_40_2373e79660dabbf194273d27aa7ee1f5.png"
           alt="logo" />
-        <span className="help-text">Meet</span>
+        <span class="help-text">Meet</span>
       </div>
-      <button onClick="{handleClick}">Logout</button>
-      <div className="action-btn">
-        <!-- <FontAwesomeIcon className='icon-block' icon={faQuestionCircle} />
-        <FontAwesomeIcon className='icon-block' icon={faExclamationCircle} />
-        <FontAwesomeIcon className='icon-block' icon={faCog} /> -->
+      
+      <div class="action-btn">
+        <button class="icon-block">Logout</button>
+        <!-- <FontAwesomeIcon class='icon-block' icon={faQuestionCircle} />
+        <FontAwesomeIcon class='icon-block' icon={faExclamationCircle} />
+        <FontAwesomeIcon class='icon-block' icon={faCog} /> -->
       </div>
     </div>
     <div class="body">
@@ -36,21 +37,26 @@
           <div class="action-btn">
             <a href="/create-meeting">
               <button class="btn green">
-                <!-- <FontAwesomeIcon className='icon-block' icon={faVideo} /> -->
+                <!-- <FontAwesomeIcon class='icon-block' icon={faVideo} /> -->
                 New Meeting
               </button>
             </a>
 
             <form action="/join" method="post" class="input-block">
               <div class="input-section">
-                <!-- <FontAwesomeIcon className='icon-block' icon={faKeyboard} /> -->
+                <!-- <FontAwesomeIcon class='icon-block' icon={faKeyboard} /> -->
                 <input type="text" placeholder="Enter a code or link" name="meeting" />
               </div>
-              <button type="submit" class="btn no-bg">Join</button>
+              <button type="submit" class="btn green">Join</button>
             </form>
           </div>
         </div>
-        <div class="schedule">
+       
+      </div>
+
+      <div class="right-side">
+        <div class="content">
+           <div class="schedule">
           Schedule a Meeting
           <form action="/schedule-meeting" method="post">
             <label for="meeting">Choose a time for your meeting:</label>
@@ -66,12 +72,6 @@
             <input type="submit" />
           </form>
         </div>
-      </div>
-
-      <div class="right-side">
-        <div class="content">
-          <img src="https://www.gstatic.com/meet/user_edu_get_a_link_light_90698cd7b4ca04d3005c962a3756c42d.svg"
-            alt="" />
         </div>
       </div>
     </div>

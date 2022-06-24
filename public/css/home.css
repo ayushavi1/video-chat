@@ -1,97 +1,227 @@
-.home-page {
+.header {
+	 width: 100%;
 	 display: flex;
-	 flex-direction: column;
-	 height: 100vh;
+	 justify-content: space-between;
+	 padding: 20px;
+	 box-sizing: border-box;
 }
- .home-page .body {
-	 flex: 1;
-	 display: flex;
-	 justify-content: space-around;
-	 align-items: center;
-}
- .home-page .body .left-side {
-	 max-width: 500px;
-}
- .home-page .body .left-side .content h2 {
-	 font-size: 44px;
-	 font-weight: 400;
-	 margin: 0;
-}
- .home-page .body .left-side .content p {
-	 font-size: 18px;
-	 font-weight: 300;
-}
- .home-page .body .left-side .content .action-btn {
-	 margin-bottom: 60px;
+ .header .logo {
 	 display: flex;
 	 align-items: center;
-	 justify-content: space-around;
+	 width: 124px;
 }
- .home-page .body .left-side .content .action-btn .btn {
-	 display: flex;
-	 justify-content: center;
-	 align-items: center;
-	 font-size: 16px;
-	 padding: 15px;
-	 border: none;
-	 outline: none;
-	 background: none;
-	 border-radius: 5px;
-	 color: #00796b;
-	 cursor: pointer;
-	 text-decoration: none;
+ .header .logo img {
+	 width: 100%;
 }
- .home-page .body .left-side .content .action-btn .btn .icon-block {
-	 padding-right: 10px;
-}
- .home-page .body .left-side .content .action-btn .btn:hover {
-	 background: #f6faf9;
-}
- .home-page .body .left-side .content .action-btn .input-block {
-	 margin-left: 20px;
-	 display: flex;
-	 flex: 1;
-}
- .home-page .body .left-side .content .action-btn .input-block .input-section {
-	 position: relative;
-	 margin-right: 10px;
-}
- .home-page .body .left-side .content .action-btn .input-block .input-section .icon-block {
-	 position: absolute;
-	 top: 50%;
-	 transform: translate(10px, -50%);
+ .header .logo .help-text {
+	 font-size: 22px;
+	 padding-left: 4px;
 	 color: #5f6368;
 }
- .home-page .body .left-side .content .action-btn .input-block .input-section input {
-	 font-size: 16px;
-	 height: 48px;
-	 border: 1px solid #ccc;
-	 border-radius: 5px;
-	 padding-left: 35px;
-	 width: 100%;
-	 box-sizing: border-box;
-	 outline: none;
+ .header .action-btn {
+	 display: flex;
+	 align-items: center;
 }
- .home-page .body .left-side .help-text {
-	 margin-top: 30px;
-	 padding-top: 25px;
-	 border-top: 1px solid #ddd;
-}
- .home-page .body .left-side .help-text a {
-	 text-decoration: none;
-	 color: #00796b;
-}
- .home-page .body .right-side .content {
-	 border: 1px solid #eee;
-	 border-radius: 5px;
-	 padding: 30px;
-	 width: 100%;
-	 max-width: 650px;
-	 box-sizing: border-box;
-	 box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302), 0 2px 6px 2px rgba(60, 64, 67, 0.149);
-}
- .home-page .body .right-side .content img {
-	 width: 100%;
-	 border-radius: 5px;
+ .header .action-btn .icon-block {
+	 font-size: 20px;
+	 padding: 10px;
+	 color: #5f6368;
 }
  
+
+.home-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.home-page .body {
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.home-page .body .left-side {
+  max-width: 500px;
+}
+
+.home-page .body .left-side .content {
+  margin: 10px auto;
+  width: 100%;
+  height: 25rem;
+  background-color: #fff;
+  padding: 80px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.33);
+  -moz-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.33);
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.33);
+}
+
+.home-page .body .left-side .content h2 {
+  font-size: 44px;
+  font-weight: 400;
+  margin-bottom: 4rem;
+}
+.home-page .body .left-side .content p {
+  font-size: 18px;
+  font-weight: 300;
+    margin-bottom: 4rem;
+
+}
+.home-page .body .left-side .content .action-btn {
+  margin-bottom: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.home-page .body .left-side .content .action-btn .btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  padding: 15px;
+  border: none;
+  outline: none;
+  background: none;
+  border-radius: 5px;
+  color: #00796b;
+  cursor: pointer;
+  text-decoration: none;
+}
+.home-page .body .left-side .content .action-btn .btn .icon-block {
+  padding-right: 10px;
+}
+.home-page .body .left-side .content .action-btn .btn:hover {
+  background: #f6faf9;
+}
+.home-page .body .left-side .content .action-btn .input-block {
+  margin-left: 20px;
+  display: flex;
+  flex: 1;
+}
+.home-page .body .left-side .content .action-btn .input-block .input-section {
+  position: relative;
+  margin-right: 10px;
+}
+.home-page
+  .body
+  .left-side
+  .content
+  .action-btn
+  .input-block
+  .input-section
+  .icon-block {
+  position: absolute;
+  top: 50%;
+  transform: translate(10px, -50%);
+  color: #5f6368;
+}
+.home-page
+  .body
+  .left-side
+  .content
+  .action-btn
+  .input-block
+  .input-section
+  input {
+  font-size: 16px;
+  height: 48px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding-left: 35px;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+}
+.home-page .body .left-side .help-text {
+  margin-top: 30px;
+  padding-top: 25px;
+  border-top: 1px solid #ddd;
+}
+.home-page .body .left-side .help-text a {
+  text-decoration: none;
+  color: #00796b;
+}
+.home-page .body .right-side .content {
+  margin: 20px auto;
+  width: 100%;
+  height: auto;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.33);
+  -moz-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.33);
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.33);
+}
+.home-page .body .right-side .content img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.green {
+  background: #00796b !important;
+  color: #fff !important;
+  font-weight: 500 !important;
+}
+.green:hover {
+  background: #00685c !important;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'arial', heletica, sans-serif;
+  font-size: 12px;
+  background: #1a1b41
+    url('https://static.tumblr.com/03fbbc566b081016810402488936fbae/pqpk3dn/MRSmlzpj3/tumblr_static_bg3.png')
+    repeat 0 0;
+  -webkit-animation: 10s linear 0s normal none infinite animate;
+  -moz-animation: 10s linear 0s normal none infinite animate;
+  -ms-animation: 10s linear 0s normal none infinite animate;
+  -o-animation: 10s linear 0s normal none infinite animate;
+  animation: 10s linear 0s normal none infinite animate;
+}
+
+@-webkit-keyframes animate {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 500px 0;
+  }
+}
+
+@-moz-keyframes animate {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 500px 0;
+  }
+}
+
+@-ms-keyframes animate {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 500px 0;
+  }
+}
+
+@-o-keyframes animate {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 500px 0;
+  }
+}
+
+@keyframes animate {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 500px 0;
+  }
+}
