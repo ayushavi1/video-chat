@@ -10,6 +10,7 @@ const dotenv = require('dotenv');
 const session = require('express-session');
 const Room = require('./models/room');
 const { sendMail } = require('./Utils/email');
+
 dotenv.config({ path: './config.env' });
 
 app.set('view engine', 'ejs');
@@ -235,6 +236,11 @@ app.post('/schedule-meeting', (req, res) => {
     res.redirect('/auth/login');
   }
 });
+
+app.get('*', (req,res,next) => {
+  res.status(404);
+  res.render('notFound');
+})
 
 server.listen(process.env.PORT || 3000, function () {
   console.log(`Server running on port ${process.env.PORT}`.rainbow.bold);

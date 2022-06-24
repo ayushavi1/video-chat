@@ -17,12 +17,13 @@ async function sendMail(userDetails) {
     });
     //ef.emailFormat();
     //console.log('hello', userDetails);
+    const content = ef.emailFormat();
     let info = await transporter.sendMail({
         from: 'Gmeet-Clone', // sender address
         to: userDetails.userEmail, // list of receivers
         subject: "Hello, you have a meeting scheduled!", // Subject line
         text: "Hello, you have a meeting scheduled! ", // plain text body
-        html: `<b>Hello, you have a meeting scheduled 15 minutes from now</b>`, // html body
+        html: content, // html body
     });
 
     console.log(`Message sent`.bgMagenta);
