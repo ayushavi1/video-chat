@@ -78,15 +78,14 @@ app.get(
 );
 
 app.get('/auth/logout', (req, res) => {
-  try {
-    if (req.user) {
-      req.logout();
-      res.send('Success');
-    }
-  } catch (error) {
-    console.log(error);
+
+  if (req.user) {
+    req.logout(function (err) {
+      if (err) console.log(err);
+      else res.redirect('/');
+    }); 
   }
-});
+})
 
 app.get('/create-meeting', (req, res) => {
   if (req.user) {
@@ -212,7 +211,7 @@ app.post('/schedule-meeting', (req, res) => {
   if (req.user) {
     //console.log(req.body);
     const userDetails = {
-      userEmail: req.body.emailAddresses.split(','),
+      userEmail: req.body.emailAddresses
     };
     // calculate time difference
     let [h, m] = req.body.meetingTime.split(':');

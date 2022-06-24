@@ -20,7 +20,9 @@
       </div>
       
       <div class="action-btn">
-        <button class="icon-block">Logout</button>
+        <form action="/auth/logout" method="get">
+        <input type="submit" class="icon-block" value="logout">
+      </form>
         <!-- <FontAwesomeIcon class='icon-block' icon={faQuestionCircle} />
         <FontAwesomeIcon class='icon-block' icon={faExclamationCircle} />
         <FontAwesomeIcon class='icon-block' icon={faCog} /> -->
@@ -58,20 +60,66 @@
         <div class="content">
            <div class="schedule">
           Schedule a Meeting
-          <form action="/schedule-meeting" method="post">
+          <form onsubmit="event.preventDefault();">
             <label for="meeting">Choose a time for your meeting:</label>
 
-            <input type="time" id="meeting" name="meetingTime"
+            <input type="time" id="meeting" name="meetingTime" class="meetingTime"
                    min=<%=curTime %>  max="23:59" required>
                    <br><br>
-            <label for="recepients">Enter number of recepients</label>
-            <input type="number" name="recepients" min="1" max="20" required>
-            <br><br>
-            <label for="email" name="emailAddresses" required>Enter email addresses separated by a comma</label>
-            <input type="email" name="emailAddresses" multiple>
-            <input type="submit" />
+            <div class="email-list"></div>
+            <label for="email" name="emailAddresses" required>Enter email addresses</label>
+            <input type="email" name="emailAddresses" class="email-form" >
+            <button name="email-add" onclick="handleAdd();">Add</button>
+            <button onclick=" handleSubmit()">Submit </button>
           </form>
         </div>
+        <script>
+          
+          async function handlelogout() {
+            const res = await fetch('auth/logout');         
+          }
+
+          let emails = [];
+
+          function handleAdd() {
+            const newEmail = document.querySelector('.email-form').value;
+            document.querySelector('.email-form').value = "";
+            emails.push(newEmail);
+            
+            document.querySelector('.email-list').innerHTML += `<div>${newEmail}</div> <button>delete</button>` 
+          
+          }
+
+          async function handleSubmit() {
+            const time = document.querySelector('.meetingTime').value;
+            console.log(time);
+            const data = { 
+              meetingTime: time,
+              emailAddresses: emails
+             }
+             const response = await fetch('/schedule-meeting', {
+              method: 'POST',
+              mode: 'cors', 
+              cache: 'no-cache', 
+              credentials: 'same-origin', 
+              headers: {
+                'Content-Type': 'application/json'
+                
+              },
+              redirect: 'follow',
+              referrerPolicy: 'no-referrer', 
+              body: JSON.stringify(data) // 
+            });
+
+            window.location.reload();
+
+          }
+            
+
+
+
+
+        </script>
         </div>
       </div>
     </div>
