@@ -1,7 +1,16 @@
 const express = require('express');
 const app = express();
 const colors = require('colors');
-const server = require('http').Server(app);
+// const server = require('http').Server(app);
+
+const https= require("https");
+const fs = require('fs');
+const option = {
+  key: fs.readFileSync('key.pem'),
+  cert: fs.readFileSync("cert.pem")
+};
+const server = https.createServer(options, app);
+
 const { v4: uuidv4 } = require('uuid');
 const mongoose = require('mongoose');
 const passport = require('passport');
