@@ -64,10 +64,7 @@ var displayMediaOptions = {
   audio: false,
 };
 //------------------------------------------------------------------peer element
-const peer = new Peer(undefined, {
-  host: '/',
-  port: '3001',
-});
+const peer = new Peer(undefined);
 
 //------------------------------------------------------------------ socket-peer-call-stream
 let myVideoStream;
@@ -416,6 +413,7 @@ recordbtn.addEventListener('click', async function () {
 });
 
 stoprecord.addEventListener('click', function () {
+  recording = false;
   mediaRecorder.stop();
   recordbtn.style.display = 'block';
   stoprecord.style.display = 'none';

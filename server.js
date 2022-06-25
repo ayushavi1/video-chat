@@ -11,6 +11,10 @@ const session = require('express-session');
 const Room = require('./models/room');
 const { sendMail } = require('./Utils/email');
 
+const { ExpressPeerServer } = require('peer');
+const peerServer = ExpressPeerServer(server, { debug: true });
+app.use('/peerjs', peerServer);
+
 dotenv.config({ path: './config.env' });
 
 app.set('view engine', 'ejs');
