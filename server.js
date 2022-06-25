@@ -9,7 +9,7 @@ const option = {
   key: fs.readFileSync('key.pem'),
   cert: fs.readFileSync("cert.pem")
 };
-const server = https.createServer(options, app);
+const server = https.createServer(option, app);
 
 const { v4: uuidv4 } = require('uuid');
 const mongoose = require('mongoose');
