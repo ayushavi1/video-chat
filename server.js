@@ -19,6 +19,11 @@ const dotenv = require('dotenv');
 const session = require('express-session');
 const Room = require('./models/room');
 const { sendMail } = require('./Utils/email');
+
+const { ExpressPeerServer } = require('peer');
+const peerServer = ExpressPeerServer(server, { debug: true });
+app.use('/peerjs', peerServer);
+
 dotenv.config({ path: './config.env' });
 
 app.set('view engine', 'ejs');
@@ -82,7 +87,7 @@ app.get(
   passport.authenticate('google', { failureRedirect: '/login' }),
   function (req, res) {
     // Successful authentication, redirect home.
-    res.redirect('http://localhost:3000/home');
+    res.redirect('/home');
   }
 );
 
@@ -244,6 +249,11 @@ app.post('/schedule-meeting', (req, res) => {
     res.redirect('/auth/login');
   }
 });
+
+app.get('*', (req,res,next) => {
+  res.status(404);
+  res.render('notFound');
+})
 
 server.listen(process.env.PORT || 3000, function () {
   console.log(`Server running on port ${process.env.PORT}`.rainbow.bold);
