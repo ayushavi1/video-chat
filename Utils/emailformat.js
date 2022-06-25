@@ -817,9 +817,9 @@ const html = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "ht
                                                                             <tbody>
                                                                                 <tr>
                                                                                     <td class="esd-block-text es-p40t es-p10b es-p40r es-p40l" align="left" bgcolor="transparent">
-                                                                                        <p style="color: #999999;">Hello username,</p>
+                                                                                        <p style="color: #999999;">Hello</p>
                                                                                         <p style="color: #999999;"><br></p>
-                                                                                        <p style="color: #999999;">The following websites are down!</p>
+                                                                                        <p style="color: #999999;">Your meeting starts 15 minutes from now!</p>
                                                                                                                            
                                                                                         <p style="color: #999999;"><br></p>
                                                                                         <p style="color: #999999;">Cheers,</p>
@@ -830,7 +830,7 @@ const html = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "ht
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td class="esd-block-text es-p40b es-p40r es-p40l" align="left">
-                                                                                        <p>Lolzone13</p>
+                                                                                        <p>The gmeet clone team</p>
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>
@@ -926,8 +926,6 @@ const html = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "ht
 
 </html>`
 
-exports.emailFormat = function (userDetails) {
-
-
-
+exports.emailFormat = function () {
+    return html;
 }
