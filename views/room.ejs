@@ -25,6 +25,8 @@
   <script src="script.js" defer></script>
   <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
   <script>
+
+
     function togglechat() {
       var element = document.getElementById("chat_component");
       if (element.style.display === "none") {
@@ -62,6 +64,58 @@
       element2.style.display = "none";
 
 
+      // ---------------------------------------------------------------- meeting time
+
+      var seconds = 00; 
+  var mins = 00;
+  var hours = 00; 
+
+  var appendmin = document.getElementById("min")
+  var appendSeconds = document.getElementById("sec")
+  var appendHrs = document.getElementById("hours")
+  var Interval ;
+  
+    clearInterval(Interval);
+     Interval = setInterval(startTimer, 1000);  
+  
+  function startTimer () {
+    console.log("called");
+    seconds++; 
+    
+    if(seconds <= 9){
+      appendSeconds.innerHTML = "0" + seconds;
+    }
+    
+    if (seconds > 9){
+      appendSeconds.innerHTML = seconds;
+      
+    } 
+    
+    if (seconds > 59) {
+      // console.log("seconds");
+      seconds=0;
+      appendSeconds.innerHTML = "0" + 0;
+      mins++;
+      appendmin.innerHTML = "0" + mins;
+    }
+    
+    if (mins > 9){
+      appendmin.innerHTML = mins;
+    }
+    if (mins > 59) {
+      // console.log("seconds");
+      mins=0;
+      appendmin.innerHTML = "0" + 0;
+      hours++;
+      appendHrs.innerHTML = "0" + hours;
+    }
+    
+    if (hours > 9){
+      appendHrs.innerHTML = hours;
+    }
+  
+  }
+  
 
     }
   </script>
@@ -190,7 +244,7 @@
     </div>
   <div class="main__bottom">
     <div class="options">
-      <div class="time"><h3>00:00:00</h3></div>
+      <div class="time"><h3 id="hours">00</h3><h3>:</h3><h3 id="min">00</h3><h3>:</h3><h3 id="sec">00</h3></div>
       <div class="options__left" style="width: 100%">
         <div id="stopVideo" class="video__button">
           <!-- <i class="fa-solid fa-circle-video" style="background-color:white"></i> -->
