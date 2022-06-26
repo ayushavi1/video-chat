@@ -96,7 +96,7 @@ navigator.mediaDevices
         people.innerHTML =
           people.innerHTML +
           `<div id=${call.peer} class="person">
-            <b><img class="userimg" src=${call.metadata.photo} <span style="color:black;"> ${call.metadata.name}</span> </b>
+            <b><img class="userimg" src=${call.metadata.photo}></img> <span > ${call.metadata.name}</span> </b>
         </div>`;
         const video = document.createElement('video');
         call.on('stream', (userVideoStream) => {
@@ -132,7 +132,7 @@ navigator.mediaDevices
       people.innerHTML =
         people.innerHTML +
         `<div id=${userId} class="person">
-            <b><img class="userimg" src=${userphoto} <span style="color:black;"> ${userName}</span> </b>
+            <b><img class="userimg" src=${userphoto} <span "> ${userName}</span> </b>
            
         </div>`;
     });
@@ -144,10 +144,10 @@ socket.on('createMessage', (message, userId, userName, userPhoto) => {
   messages.innerHTML =
     messages.innerHTML +
     `<div class="message">
-          <b><img class="userimg" src=${userId === myUserId ? myPhoto : userPhoto}  <span style="color:black;"> ${
+          <b><img class="userimg" src=${userId === myUserId ? myPhoto : userPhoto}></img>  <span style="color:black;"> ${
             userId === myUserId ? 'me' : userName
           }</span> </b>
-          <span>${message}</span>
+          <p>${message}</p>
       </div>`;
 });
 
@@ -207,7 +207,7 @@ peer.on('open', (userId) => {
   people.innerHTML =
     people.innerHTML +
     `<div id=${myUserId} class="person">
-        <b><img class="userimg" src=${myPhoto} /> <span style="color:black;"> ${myName}</span> </b>
+        <b><img class="userimg" src=${myPhoto} /> <span "> ${myName}</span> </b>
        
     </div>`;
 });

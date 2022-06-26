@@ -28,6 +28,8 @@
     function togglechat() {
       var element = document.getElementById("chat_component");
       if (element.style.display === "none") {
+        var element2 = document.getElementById("people_component");
+        element2.style.display = "none";
         element.style.display = "block";
       } else {
         element.style.display = "none";
@@ -45,10 +47,22 @@
     function togglepeople() {
       var element = document.getElementById("people_component");
       if (element.style.display === "none") {
+        var element2 = document.getElementById("chat_component");
+        element2.style.display = "none";
         element.style.display = "block";
       } else {
         element.style.display = "none";
       }
+    }
+
+    function myFunction(){
+      var element1 = document.getElementById("people_component");
+      var element2 = document.getElementById("chat_component");
+      element1.style.display = "none";
+      element2.style.display = "none";
+
+
+
     }
   </script>
 
@@ -56,7 +70,7 @@
 
 </head>
 
-<body>
+<body onload="myFunction()">
 
   <div class="main">
     <div class='meeting-info-block' id="info_component">
@@ -71,31 +85,28 @@
           </svg>
         </h3>
       </div>
-      <button class='add-people-btn'>
-        <FontAwesomeIcon class='icon' icon={faUser} />
-        Add Others
-      </button>
+      
       <p class='info-text'>
-        Or share this meeting link with others that you want in the meeting
+        Share this meeting link with others that you want in the meeting
       </p>
       <div class='meet-link'>
         <input type="text" id="meeting-room-code" readonly>
         <img src="./copy.svg" alt="copybtn" id="copyBtn">
       </div>
-      <div class='permission-text'>
-        <!-- <FontAwesomeIcon class='icon' icon={faShieldAlt} /> -->
+      <!-- <div class='permission-text'>
+        <FontAwesomeIcon class='icon' icon={faShieldAlt} />
         <p class='small-text'>
           People who use this meeting link must get your permission before they
           can join.
         </p>
-      </div>
+      </div> -->
       <p class='small-text'></p>
     </div>
     <div class="main__top">
-      <div id="screen">
-        <video id="screen-video" autoplay></video>
-      </div>
-      <div id="whiteboard-canvas">
+      
+      
+      <div class="videos__group">
+        <div id="whiteboard-canvas">
           <canvas class="whiteboard" id="whiteboard" autoplay></canvas>
           <div class="colors">
             <div class="color black"></div>
@@ -105,7 +116,9 @@
             <div class="color yellow"></div>
           </div>
         </div>
-      <div class="videos__group">
+        <div id="screen">
+          <video id="screen-video" autoplay></video>
+        </div>
         <div id="video-grid"></div>
       </div>
       <div id="chat_component" class="toggle_component">
@@ -177,6 +190,7 @@
     </div>
   <div class="main__bottom">
     <div class="options">
+      <div class="time"><h3>00:00:00</h3></div>
       <div class="options__left" style="width: 100%">
         <div id="stopVideo" class="video__button">
           <!-- <i class="fa-solid fa-circle-video" style="background-color:white"></i> -->
@@ -264,7 +278,7 @@
         <div onclick="togglepeople()" id="peopleButton" class="people__button"
           style="cursor: pointer;margin-left: 2rem;">
 
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-people-fill"
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-people-fill"
             viewBox="0 0 16 16">
             <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
             <path fill-rule="evenodd"
