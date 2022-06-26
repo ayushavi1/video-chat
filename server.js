@@ -11,6 +11,10 @@ const session = require('express-session');
 const Room = require('./models/room');
 const { sendMail } = require('./Utils/email');
 
+const { ExpressPeerServer } = require('peer');
+const peerServer = ExpressPeerServer(server, { debug: true });
+app.use('/peerjs', peerServer);
+
 dotenv.config({ path: './config.env' });
 
 app.set('view engine', 'ejs');
@@ -74,7 +78,7 @@ app.get(
   passport.authenticate('google', { failureRedirect: '/login' }),
   function (req, res) {
     // Successful authentication, redirect home.
-    res.redirect('http://localhost:3000/home');
+    res.redirect('/home');
   }
 );
 
@@ -84,7 +88,7 @@ app.get('/auth/logout', (req, res) => {
     req.logout(function (err) {
       if (err) console.log(err);
       else res.redirect('/');
-    }); 
+    });
   }
 })
 
@@ -120,12 +124,18 @@ app.get('/home', (req, res) => {
 app.get('/:room', (req, res) => {
   if (req.user) {
     //console.log("here", req.user);
-
-    res.render('room', {
-      roomId: req.params.room,
-      googleid: req.user.id,
-      name: req.user.displayName,
-      photo: req.user.photos[0].value,
+    Room.findOne({ roomId: req.params.room }, function (err, foundRoom) {
+      if (!err) {
+        if (foundRoom)
+          res.render('room', {
+            roomId: req.params.room,
+            googleid: req.user.id,
+            name: req.user.displayName,
+            photo: req.user.photos[0].value,
+          });
+        else
+          res.render('notFound');
+      }
     });
   } else {
     res.redirect('/auth/login');
@@ -134,22 +144,41 @@ app.get('/:room', (req, res) => {
 
 io.on('connection', (socket) => {
   socket.on('join-room', (roomId, name, googleid, photo, userId) => {
+    console.log("joining");
     socket.join(roomId);
     socket.to(roomId).emit('user-connected', userId, name, photo);
     Room.findOne({ roomId: roomId }, function (err, foundRoom) {
       if (!err) {
-        console.log('here2', name, googleid, photo);
-        foundRoom.users.push({
-          peerid: userId,
-          id: googleid,
-          name: name,
-          photo: photo,
-        });
-        foundRoom.currentusers = foundRoom.currentusers + 1;
-        foundRoom.save();
+        if (foundRoom) {
+          console.log('here2', name, googleid, photo);
+          foundRoom.users.push({
+            peerid: userId,
+            id: googleid,
+            name: name,
+            photo: photo,
+          });
+          foundRoom.currentusers = foundRoom.currentusers + 1;
+          foundRoom.save();
+        }
+        else {
+          const room = new Room({
+            roomId: roomId,
+            currentusers: 0,
+            users: [],
+          });
+          room.users.push({
+            peerid: userId,
+            id: googleid,
+            name: name,
+            photo: photo,
+          });
+          room.currentusers = room.currentusers + 1;
+          room.save();
+        }
       }
     });
     socket.on('disconnect', () => {
+      console.log("disconnected");
       Room.findOne({ roomId: roomId }, function (err, foundRoom) {
         if (!err) {
           foundRoom.users.map((user) => {
@@ -174,7 +203,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('message', (message, userId, userName, userPhoto) => {
-      io.to(roomId).emit('createMessage', message, userId, userName,userPhoto);
+      io.to(roomId).emit('createMessage', message, userId, userName, userPhoto);
     });
 
     socket.on('start-whiteboard', () => {
@@ -237,7 +266,7 @@ app.post('/schedule-meeting', (req, res) => {
   }
 });
 
-app.get('*', (req,res,next) => {
+app.get('*', (req, res, next) => {
   res.status(404);
   res.render('notFound');
 })

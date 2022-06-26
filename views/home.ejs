@@ -14,14 +14,13 @@
     <div class="header">
       <div class="logo">
         <img
-          src="https://www.gstatic.com/meet/google_meet_horizontal_wordmark_2020q4_1x_icon_124_40_2373e79660dabbf194273d27aa7ee1f5.png"
+          src="/logo_and_name.svg"
           alt="logo" />
-        <span class="help-text">Meet</span>
       </div>
       
       <div class="action-btn">
         <form action="/auth/logout" method="get">
-        <input type="submit" class="icon-block" value="logout">
+        <input  type="submit" class="icon-block green" value="Logout">
       </form>
         <!-- <FontAwesomeIcon class='icon-block' icon={faQuestionCircle} />
         <FontAwesomeIcon class='icon-block' icon={faExclamationCircle} />
@@ -59,18 +58,23 @@
       <div class="right-side">
         <div class="content">
            <div class="schedule">
-          Schedule a Meeting
-          <form onsubmit="event.preventDefault();">
-            <label for="meeting">Choose a time for your meeting:</label>
+          <h1>
+            Schedule a Meeting
+          </h1>
+          <form class="form-class" onsubmit="event.preventDefault();">
+            <label class="label-text" for="meeting">Choose a time for your meeting:</label>
 
             <input type="time" id="meeting" name="meetingTime" class="meetingTime"
                    min=<%=curTime %>  max="23:59" required>
                    <br><br>
-            <div class="email-list"></div>
-            <label for="email" name="emailAddresses" required>Enter email addresses</label>
+            <ul class="check-list"></ul>
+            <label class="label-text" for="email" name="emailAddresses" required>Enter E-mail addresses:</label>
             <input type="email" name="emailAddresses" class="email-form" >
-            <button name="email-add" onclick="handleAdd();">Add</button>
-            <button onclick=" handleSubmit()">Submit </button>
+            <button class="btn green" name="email-add" onclick="handleAdd();">Add
+            </button>
+            <br>
+            <br>
+            <button class="btn green" onclick=" handleSubmit()">Submit </button>
           </form>
         </div>
         <script>
@@ -86,7 +90,7 @@
             document.querySelector('.email-form').value = "";
             emails.push(newEmail);
             
-            document.querySelector('.email-list').innerHTML += `<div>${newEmail}</div> ` 
+            document.querySelector('.check-list').innerHTML += `<li>${newEmail}</li> ` 
           
           }
 
