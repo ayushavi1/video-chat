@@ -9,8 +9,8 @@ const recordbtn = document.getElementById('recordButton');
 const stoprecord = document.getElementById('stoprecordButton');
 let mediaRecorder;
 //------------------------------------------------------------------room id copy elements
-const copyBtn=document.getElementById("copyBtn");
-const input=document.querySelector('#meeting-room-code');
+const copyBtn = document.getElementById("copyBtn");
+const input = document.querySelector('#meeting-room-code');
 //------------------------------------------------------------------screensharing elements
 const startShare = document.getElementById('presentButton');
 const stopShare = document.getElementById('stoppresentButton');
@@ -49,7 +49,7 @@ document.querySelector('.small-text').innerHTML = `Joined as ${NAME}`;
 var myUserId = '';
 var myName = '';
 var screenSharer = '';
-var myPhoto=PHOTO;
+var myPhoto = PHOTO;
 
 myVideo.muted = true;
 var myscreen = null;
@@ -108,7 +108,7 @@ navigator.mediaDevices
 
           startShare.style.display = 'block';
         });
-      }else {
+      } else {
         call.answer();
         screenSharer = call.peer;
         call.on('stream', (screensrc) => {
@@ -124,12 +124,12 @@ navigator.mediaDevices
       setTimeout(() => {
         console.log('User connected: ' + userId);
         // user joined
-        connectToNewUser(userId, myName,myPhoto, stream);
+        connectToNewUser(userId, myName, myPhoto, stream);
       }, 1000);
       people.innerHTML =
         people.innerHTML +
         `<div id=${userId} class="person">
-            <b><img class="userimg" src=${userphoto} <span "> ${userName}</span> </b>
+            <b><img class="userimg" src=${userphoto} </img><span> ${userName}</span> </b>
            
         </div>`;
     });
@@ -141,9 +141,8 @@ socket.on('createMessage', (message, userId, userName, userPhoto) => {
   messages.innerHTML =
     messages.innerHTML +
     `<div class="message">
-          <b><img class="userimg" src=${userId === myUserId ? myPhoto : userPhoto}></img>  <span style="color:black;"> ${
-            userId === myUserId ? 'me' : userName
-          }</span> </b>
+          <b><img class="userimg" src=${userId === myUserId ? myPhoto : userPhoto}></img>  <span style="color:black;"> ${userId === myUserId ? 'me' : userName
+    }</span> </b>
           <p>${message}</p>
       </div>`;
 });
@@ -178,7 +177,7 @@ socket.on('drawing', onDrawingEvent);
 const connectToNewUser = (userId, myName, myPhoto, stream) => {
   console.log(userId);
   const call = peer.call(userId, stream, {
-    metadata: { type: 'video', name: myName, photo:myPhoto },
+    metadata: { type: 'video', name: myName, photo: myPhoto },
   });
   const video = document.createElement('video');
   call.on('stream', (userVideoStream) => {
@@ -192,7 +191,7 @@ const connectToNewUser = (userId, myName, myPhoto, stream) => {
   if (screenshared) {
     peer.call(userId, myscreen, { metadata: { type: 'screensharing' } });
   }
-  if(whiteboardOn){
+  if (whiteboardOn) {
     socket.emit('start-whiteboard');
   }
 };
@@ -371,10 +370,10 @@ function onResize() {
 
 //------------------------------------------------------------------Event Listeners
 
-copyBtn.addEventListener("click", ()=>{
+copyBtn.addEventListener("click", () => {
   input.select()
   document.execCommand("copy")
-  })
+})
 
 startShare.addEventListener('click', async () => {
   screendiv.style.display = 'flex';
@@ -383,7 +382,7 @@ startShare.addEventListener('click', async () => {
   try {
     await startCapture();
   } catch (error) {
-    
+
     console.log(error);
   }
   screen.srcObject = myscreen;
