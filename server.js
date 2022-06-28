@@ -119,6 +119,7 @@ app.get('/create-meeting', (req, res) => {
 
 app.get('/home', (req, res) => {
   if (req.user) {
+
     var today = new Date();
     var future = new Date(today.getTime() + 60000 * 15).toLocaleTimeString([], {
       hour: '2-digit',
@@ -240,6 +241,7 @@ app.post('/join', (req, res) => {
 
 app.get('/', (req, res) => {
   if (req.user) {
+    
     res.redirect('/home');
   } else {
     res.redirect('/auth/login');
@@ -250,7 +252,8 @@ app.post('/schedule-meeting', (req, res) => {
   if (req.user) {
     //console.log(req.body);
     const userDetails = {
-      userEmail: req.body.emailAddresses
+      userEmail: req.body.emailAddresses,
+      sender: req.user
     };
     // calculate time difference
     let [h, m] = req.body.meetingTime.split(':');
@@ -267,6 +270,7 @@ app.post('/schedule-meeting', (req, res) => {
     } else {
       seconds = (h * 60 + m + curh * 60 + curm - 15) * 60;
     }
+    console.log(seconds, seconds/60, seconds/3600);
     setTimeout(() => sendMail(userDetails), seconds * 1000);
 
     res.redirect('/home');

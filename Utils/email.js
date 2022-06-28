@@ -17,7 +17,7 @@ async function sendMail(userDetails) {
     });
     //ef.emailFormat();
     //console.log('hello', userDetails);
-    const content = ef.emailFormat();
+    const content = ef.emailFormat(userDetails);
     let info = await transporter.sendMail({
         from: 'Gmeet-Clone', // sender address
         to: userDetails.userEmail, // list of receivers
