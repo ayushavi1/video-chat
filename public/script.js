@@ -40,6 +40,7 @@ var drawing = false;
 let text = document.querySelector('#chat_message');
 let send = document.getElementById('send');
 let messages = document.querySelector('.messages');
+const toast = document.querySelector(".toast");
 //------------------------------------------------------------------participants elements
 let people = document.querySelector('.people');
 //------------------------------------------------------------------setting meeting info
@@ -126,6 +127,7 @@ navigator.mediaDevices
         // user joined
         connectToNewUser(userId, myName, myPhoto, stream);
       }, 1000);
+      showToast(`${userName} Joined`);
       people.innerHTML =
         people.innerHTML +
         `<div id=${userId} class="person">
@@ -138,6 +140,10 @@ navigator.mediaDevices
 //------------------------------------------------------------------socket events
 
 socket.on('createMessage', (message, userId, userName, userPhoto) => {
+  if(userId!==myUserId){
+    showToast(`message from ${userName}`);
+  }
+
   messages.innerHTML =
     messages.innerHTML +
     `<div class="message">
@@ -147,7 +153,7 @@ socket.on('createMessage', (message, userId, userName, userPhoto) => {
       </div>`;
 });
 
-socket.on('user-disconnected', (userId) => {
+socket.on('user-disconnected', (userId, name) => {
   if (peers[userId]) {
     if (screenSharer === userId) {
       screendiv.style.display = 'none';
@@ -156,6 +162,7 @@ socket.on('user-disconnected', (userId) => {
     }
     peers[userId].close();
   }
+  showToast(`${name} left`)
   document.getElementById(userId).remove();
 });
 
@@ -368,11 +375,23 @@ function onResize() {
   canvas.height = window.innerHeight;
 }
 
+let toastTimer;
+// the toast function
+const showToast = (msg) => {
+  clearTimeout(toastTimer);
+  toast.innerText = msg;
+  toast.classList.add("show");
+  toastTimer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2000);
+};
+
 //------------------------------------------------------------------Event Listeners
 
 copyBtn.addEventListener("click", () => {
   input.select()
   document.execCommand("copy")
+  showToast("link copied")
 })
 
 startShare.addEventListener('click', async () => {

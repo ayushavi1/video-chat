@@ -1,15 +1,15 @@
 const express = require('express');
 const app = express();
 const colors = require('colors');
-// const server = require('http').Server(app);
+const server = require('http').Server(app);
 
-const https= require("https");
-const fs = require('fs');
-const option = {
-  key: fs.readFileSync('key.pem'),
-  cert: fs.readFileSync("cert.pem")
-};
-const server = https.createServer(option, app);
+// const https= require("https");
+// const fs = require('fs');
+// const option = {
+//   key: fs.readFileSync('key.pem'),
+//   cert: fs.readFileSync("cert.pem")
+// };
+// const server = https.createServer(option, app);
 
 const { v4: uuidv4 } = require('uuid');
 const mongoose = require('mongoose');
@@ -209,7 +209,7 @@ io.on('connection', (socket) => {
           });
         }
       });
-      socket.to(roomId).emit('user-disconnected', userId);
+      socket.to(roomId).emit('user-disconnected', userId, name);
     });
 
     socket.on('message', (message, userId, userName, userPhoto) => {
