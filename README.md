@@ -38,7 +38,8 @@ A video chat application built with Node.js, Socket.io and WebRTC.
 
 ## Demo
 
--- video link
+https://drive.google.com/file/d/1oiyFcaabAQ-ufF6bF8m407-F3gzk0Qx6/view?usp=sharing
+
 ## Installation
 
 Clone the repository, cd into the folder and then run
